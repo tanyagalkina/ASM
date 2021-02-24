@@ -10,7 +10,22 @@
     section .text
 
 memset:
-    xor	rax, rax
-    mov rax, rdi ; I just return the str arg back for now))
+    enter   0, 0
+    xor rcx , rcx
+    cmp rdi, 0 ; check if 1st arg is null
+    je quit
+
+loop:
+    cmp rcx, rdx
+    je  quit
+    cmp byte[rdi + rcx], 0; check if it is the end of string to prevent the undifuned behavior!
+    je  quit
+    mov byte[rdi + rcx], sil ; %rsi	2nd argument, callee-owned	%esi	%si	%sil
+    inc rcx
+    jmp loop
+
+quit:
+    mov rax, rdi ; I just return the str arg back))
+    leave
     ret
 
