@@ -10,8 +10,30 @@
     ;The memmove() function returns a pointer to dest.
     ;
 
-    section .text
-
+;my memcpy already uses tmp... so try this
 memmove:
+    enter 0, 0  ;
+    xor rcx, rcx
+
+    cmp rdi, 0 ; rdi stores 1st arg, DEST
+    je  quit
+    cmp rsi, 0 ; rsi stores 2nd arg, SOURCE
+    je  quit
+    cmp rdx, 0; size_t n
+    je  quit; should i check if rdx value is < then 0? the type is unsigned...
+
+loop:
+    cmp byte[rsi + rcx], 0
+    je quit
+    cmp rcx, rdx
+    je quit
+    ;****************;mov [rdi + rcx], [rsi + rcx] why it does not go? addressing modes?
+    mov r9b, [rsi + rcx] ; copy to tpm
+    mov [rdi + rcx], r9b ; copy to DEST[rcx]
+    inc rcx
+    jmp loop
+
+quit:
     mov rax, rdi
+    leave
     ret
