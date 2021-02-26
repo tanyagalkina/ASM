@@ -1,5 +1,5 @@
     BITS    64
-    global my_strcspn:function
+    global strcspn:function
     ;*************************************************
     ;size_t strcspn(const char *s, const char *reject);
     ;The strcspn() function calculates the length of the initial segment  of  s
@@ -11,6 +11,6 @@
 
     section .text
 
-my_strcspn:
+strcspn:
     mov rax, 1
     ret
