@@ -22,10 +22,10 @@ big_loop:
     cmp byte[rdi + rcx], 0 ; if we are at the end of the stack string
     je not_found
     mov r9b, byte[rsi + r12] ; needle str
-    add r12, rcx
-    mov r8b, byte[rdi + r12] ; stack str
     cmp r9b, 0 ; if the needle string came until the end
     je found
+    add r12, rcx
+    mov r8b, byte[rdi + r12] ; stack str
     cmp r9b, r8b
     jne schift
     sub r12, rcx
@@ -38,7 +38,8 @@ schift:
     jmp big_loop
 
 found:
-    mov rax, [rdi + rcx] 
+    mov rax, rdi
+    add rax, rcx
     leave
     ret
 
