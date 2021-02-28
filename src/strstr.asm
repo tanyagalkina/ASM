@@ -1,6 +1,6 @@
     BITS    64
     global strstr:function
-    extern strlen
+    extern strlen ;; it does not work so trivial((((
     ;
     ;The  strstr() function finds the first occurrence of the substring nee‐
     ;   dle in the string haystack.  The terminating null bytes ('\0') are  not
@@ -18,10 +18,8 @@ strstr:
     xor r12, r12  ; set 2nd counter for the needle str
     xor rax, rax  ; set return to zero
 
-
-
 big_loop:
-    cmp byte[rdi + rcx], 0 ; if we are at the end of the stach string
+    cmp byte[rdi + rcx], 0 ; if we are at the end of the stack string
     je not_found
     mov r9b, byte[rsi + r12] ; needle str
     add r12, rcx
@@ -40,7 +38,7 @@ schift:
     jmp big_loop
 
 found:
-    mov rax, [rdi + r12]
+    mov rax, [rdi + rcx] 
     leave
     ret
 
