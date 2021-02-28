@@ -37,31 +37,45 @@ strcasecmp:
 
 capitalize_c1:
     sub r9b, 32
-    jmp loop
+    cmp r9b, 90
+	mov	r8b, byte[rsi + rcx]	; c2 = (unsigned char) *s2++;
+	cmp r8b, 90
+	jg capitalize_c2
+	jmp compare
 
 capitalize_c2:
     sub r8b, 32
-    jmp loop
+    jmp compare
 
 returnc1c2:
     mov r13b, r9b
     sub r13b, r8b
     movsx rax, r13b ; sx suffix moves smaller regs to bigger
-    jmp away
+    leave
+    ret
+
+call_second:
+    mov r8b, byte[rsi + rcx]
+    jmp returnc1c2
+
 
 loop:
     mov	r9b, byte[rdi + rcx]	; c1 = (unsigned char) *s1++;
 	cmp	r9b, 0 		            ; if (c1 == '\0')
-	je	returnc1c2
+	je	call_second
 	cmp r9b, 90
 	jg  capitalize_c1
 	mov	r8b, byte[rsi + rcx]	; c2 = (unsigned char) *s2++;
-	cmp	r9b, r8b	   	; while (c1 == c2);
-	jne	returnc1c2
-	inc	rcx			    ; i++
-	jmp	loop
+    cmp r8b, 90
+    jg capitalize_c2
+    cmp r9b, r8b
+    jne returnc1c2
+    inc rcx
+    jmp loop
 
-away:
-    leave
-    ret
+compare:
+    cmp r9b, r8b
+    jne returnc1c2
+    inc rcx
+    jmp loop
 
