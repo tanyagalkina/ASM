@@ -1,4 +1,5 @@
     BITS    64
+    extern strcmp
     global strcasecmp:function
     ;int strcasecmp(const char *s1, const char *s2);
     ;The  strcasecmp()  function  performs  a byte-by-byte comparison of the
@@ -29,7 +30,38 @@
 
 
     section .text
-
 strcasecmp:
-        xor rax, rax
-        ret
+    enter 0, 0 ; I dont really need to use the stack cause I dont use any local vars
+    xor rcx, rcx
+    jmp loop
+
+capitalize_c1:
+    sub r9b, 32
+    jmp loop
+
+capitalize_c2:
+    sub r8b, 32
+    jmp loop
+
+returnc1c2:
+    mov r13b, r9b
+    sub r13b, r8b
+    movsx rax, r13b ; sx suffix moves smaller regs to bigger
+    jmp away
+
+loop:
+    mov	r9b, byte[rdi + rcx]	; c1 = (unsigned char) *s1++;
+	cmp	r9b, 0 		            ; if (c1 == '\0')
+	je	returnc1c2
+	cmp r9b, 90
+	jg  capitalize_c1
+	mov	r8b, byte[rsi + rcx]	; c2 = (unsigned char) *s2++;
+	cmp	r9b, r8b	   	; while (c1 == c2);
+	jne	returnc1c2
+	inc	rcx			    ; i++
+	jmp	loop
+
+away:
+    leave
+    ret
+
