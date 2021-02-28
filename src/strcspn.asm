@@ -15,7 +15,7 @@
 
 strcspn:
     enter 0, 0  ; why =? give some space maybe?
-    xor rcx, rcx ; reset counter
+    mov rcx, -1
     xor rax, rax
     xor r12, r12
     jmp get_length_second
@@ -30,17 +30,21 @@ is_in:
 
 
 get_length_second:
+    inc rcx
     xor r12, r12
     cmp byte[rdi + rcx], 0 ; while (s[i] != '\0') ;
-    ;mov al, byte[r12 + 1]
     je away
     mov bl,  byte[rdi + rcx];nto -> tpm
-    inc rcx
     jmp is_in
+
+found:
+    mov rax, rcx
+    inc rax
+    leave
+    ret
 
 away:
     mov rax, rcx
-    ;mov rax, r12
    	leave
     ret
 
