@@ -1,8 +1,13 @@
 
-##### Project Information
-- 2nd year project
-- Assembly
-- Part of the `x86-64 Assembly` course at Epitech
+# Project's Goal
+- Introdiction in x86-64 Assemlby while recoding a tiny library of C functions
+- Learning about processor, its registers and instruction set
+- Learning about memory and stack operation
 
-# asm_minilibc
-mini lib C in assembly - (Second year Epitech project)
+# ASM minilib C
+mini lib C in assembly - (Second year Epitech project), Part of the `x86-64 Assembly` course
+
+## Personal
+
+It was a great feeling discovering the way machine is thinking 🤣 !!
+
