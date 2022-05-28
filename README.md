@@ -6,6 +6,13 @@
 
 # ASM minilib C
 mini lib C in assembly - (Second year Epitech project), Part of the `x86-64 Assembly` course
+## Functions
+
+|               |             |         |         |
+| ------------- | ----------- | ------- | ------- |
+| memcpy        |  memmove    | memset  | rindex  |
+| strcasecmp    |  strchr     | strcmp  | strcspn |
+| strlen        |  strncmp    | strpbrk | strstr  |
 
 ## Personal
 
