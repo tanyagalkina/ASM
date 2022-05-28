@@ -1,8 +1,8 @@
 
 # Project's Goal
-- Introdiction in x86-64 Assemlby while recoding a tiny library of C functions
+- Introduction in x86-64 Assemlby while recoding a tiny library of C functions
 - Learning about processor, its registers and instruction set
-- Learning about memory and stack operation
+- Learning about heap and stack
 
 # ASM minilib C
 mini lib C in assembly - (Second year Epitech project), Part of the `x86-64 Assembly` course
